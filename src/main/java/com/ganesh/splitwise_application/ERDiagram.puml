@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+entity Users{
+**userid** pk
+name
+avatarurl
+phone
+mail
+password
+}
+entity Groups{
+**group_id** pk
+name
+about
+}
+entity Expenses{
+**exp_id** pk
+name
+amount
+user_id fk
+group_id fk
+}
+entity Transactions{
+**t_id** pk
+amount
+user_id fk
+exp_id fk
+}
+entity GroupsUsers{
+**id** pk
+group_id fk
+user_id fk
+}
+Users ||--{ Expenses
+Users ||--{ Transactions
+Users }--{ Groups
+Groups ||--{ Expenses
+Expenses ||--{ Transactions
+@enduml
