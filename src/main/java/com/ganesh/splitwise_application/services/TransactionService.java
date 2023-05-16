@@ -1,6 +1,7 @@
 package com.ganesh.splitwise_application.services;
 
 import com.ganesh.splitwise_application.DTO.CreateTransactionDto;
+import com.ganesh.splitwise_application.models.Expense;
 import com.ganesh.splitwise_application.models.Transaction;
 import com.ganesh.splitwise_application.enums.TransactionType;
 import com.ganesh.splitwise_application.repositories.TransactionRepository;
@@ -35,5 +36,11 @@ public class TransactionService {
 
     public List<Transaction> getTransactionsByExpenseAndTransactionType(long id, TransactionType t) {
         return transactionRepository.findAllByExpenseIdAndType(id,t);
+    }
+
+    public double amountFilledPerExpense(long exp_id) {
+        Expense e=expenseService.getExpense(exp_id);
+       double amount=transactionRepository.findSumByExpIdAndType(e,TransactionType.PAID);
+        return amount;
     }
 }

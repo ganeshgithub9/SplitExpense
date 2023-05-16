@@ -26,14 +26,14 @@ public class UserController {
             userService.createUser(dto);
             return new ResponseEntity<>("Registered successfully", HttpStatus.CREATED);
         }
-        return new ResponseEntity<>("User already exists on this mail",HttpStatus.CONFLICT);
+        return new ResponseEntity<>("User already exists on this mail",HttpStatus.CONFLICT); //user exists
     }
 
     @GetMapping(value = "/user/{id}")
     public ResponseEntity<GetUserDTO> getUser(@PathVariable("id") Long id){
         User u= userService.getUser(id);
         if(u==null)
-            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND); //no user found
         return new ResponseEntity<>(GetUserDTO.builder().name(u.getName()).phone(u.getPhone()).mail(u.getMail()).build(),HttpStatus.FOUND);
     }
 
@@ -42,6 +42,6 @@ public class UserController {
         boolean check=userService.login(ld);
         if(check)
             return new ResponseEntity<>("Logged in successfully",HttpStatus.OK);
-        return new ResponseEntity<>("Log in failed",HttpStatus.UNAUTHORIZED);
+        return new ResponseEntity<>("Log in failed",HttpStatus.UNAUTHORIZED); //Invalid mail or password
     }
 }

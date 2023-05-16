@@ -36,4 +36,8 @@ public class ExpenseService {
     public Expense getExpense(long expenseId) {
          return expenseRepository.findById(expenseId).orElse(null);
     }
+
+    public double getAmount(long id) {
+         return expenseRepository.findAmountById(id);
+    }
 }
