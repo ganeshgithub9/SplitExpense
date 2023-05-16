@@ -39,7 +39,7 @@ public class GroupController {
     public  ResponseEntity<GetGroupDto> getGroup(@PathVariable("id") Long id){
         Group g=groupService.getGroup(id);
 //        if(g==null)
-//            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+//            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND); //if group id not found
        GetGroupDto ggd=GetGroupDto.builder().name(g.getName()).about(g.getAbout()).build();
         return new ResponseEntity<>(ggd,HttpStatus.FOUND);
     }
