@@ -58,6 +58,10 @@ public class UserService {
         User u=userRepository.findByMail(mail);
         return u;
     }
+
+    public boolean hello() {
+        return passwordEncoder.matches("abi","$2a$10$ZWuvfsfc/ONdYR.iH/1lo.XqYuKhGqK5x6Pksjry153RzDRMIi28y");
+    }
 }
 
 
