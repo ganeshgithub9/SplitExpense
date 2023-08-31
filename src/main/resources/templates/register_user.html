@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1" />
+    <title>User Registration</title>
+    <style>
+        body{
+            border: 5px solid red;
+            margin: 2%;
+        }
+        #parent{
+            border: 2px solid black;
+            padding-left: 200px;
+            height: 1000px;
+        }
+        /* img{
+            height:200px;
+            width:100%;
+        }
+        label{
+            display: block;
+            padding-right: 20%;
+            padding-left: 20%;
+        } */
+        form{
+            /*top: 10%;
+            left: 30%;*/
+        }
+        table{
+            padding-left: 20%;
+            border-spacing: 30px;
+        }
+        td{
+            font-size: 20px;
+            width: 100px;
+            height: 30px;
+        }
+        input{
+            font-size: 20px;
+            height: 30px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+   <div id="parent">
+      <img src="../images/SplitExpenselogo.jpg" alt="SplitExpense logo">
+      <form name="registration" onsubmit="getdata()">
+          <table>
+              <tr><td>Name</td><td><input name="name" type="text" placeholder="Name" required></td></tr>
+              <tr><td>Mail</td><td><input name="mail" type="text" placeholder="Mail" required></td></tr>
+              <tr><td>Phone</td><td><input name="phone" type="number" placeholder="Phone" required></td></tr>
+              <tr><td>Password</td><td><input name="password" type="password" placeholder="Password" required></td></tr>
+              <tr><td></td><td><input id="sub" type="submit"></td></tr>
+          </table>
+
+      </form>
+  </div>
+<script>
+    function getdata(){
+        let n=document.registration.name.value,m=document.registration.mail.value,ph=document.registration.phone.value,pwd=document.registration.password.value;
+        const user={
+            name:n,
+            mail:m,
+            phone:ph,
+            password:pwd,
+        }
+        console.log(user)
+    }
+    /*let sub=document.getElementById('sub')
+    sub.addEventListener('click',
+    function (){
+        let n=document.registration.name.value,m=document.registration.mail.value,ph=document.registration.phone.value,pwd=document.registration.password.value;
+        var user={
+            name:n,
+            mail:m,
+            phone:ph,
+            password:pwd,
+        }
+        console.log(user)
+    });*/
+</script>
+</body>
+</html>
