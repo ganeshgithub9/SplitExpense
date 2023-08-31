@@ -45,41 +45,17 @@
 </head>
 <body>
    <div id="parent">
-      <img src="../images/SplitExpenselogo.jpg" alt="SplitExpense logo">
-      <form name="registration" onsubmit="getdata()">
+      <img th:src="@{../static/images/SplitExpenselogo.jpg}" alt="SplitExpense logo">
+      <form action="#" method="post" th:action="@{/user}" th:object="${user}" name="registration" >
           <table>
-              <tr><td>Name</td><td><input name="name" type="text" placeholder="Name" required></td></tr>
-              <tr><td>Mail</td><td><input name="mail" type="text" placeholder="Mail" required></td></tr>
-              <tr><td>Phone</td><td><input name="phone" type="number" placeholder="Phone" required></td></tr>
-              <tr><td>Password</td><td><input name="password" type="password" placeholder="Password" required></td></tr>
+              <tr><td>Name</td><td><input name="name" type="text" th:field="*{name}" placeholder="Name" required></td></tr>
+              <tr><td>Mail</td><td><input name="mail" type="text" th:field="*{mail}" placeholder="Mail" required></td></tr>
+              <tr><td>Phone</td><td><input name="phone" type="number" th:field="*{phone}" placeholder="Phone" required></td></tr>
+              <tr><td>Password</td><td><input name="password" type="password" th:field="*{password}" placeholder="Password" required></td></tr>
               <tr><td></td><td><input id="sub" type="submit"></td></tr>
           </table>
 
       </form>
   </div>
-<script>
-    function getdata(){
-        let n=document.registration.name.value,m=document.registration.mail.value,ph=document.registration.phone.value,pwd=document.registration.password.value;
-        const user={
-            name:n,
-            mail:m,
-            phone:ph,
-            password:pwd,
-        }
-        console.log(user)
-    }
-    /*let sub=document.getElementById('sub')
-    sub.addEventListener('click',
-    function (){
-        let n=document.registration.name.value,m=document.registration.mail.value,ph=document.registration.phone.value,pwd=document.registration.password.value;
-        var user={
-            name:n,
-            mail:m,
-            phone:ph,
-            password:pwd,
-        }
-        console.log(user)
-    });*/
-</script>
 </body>
 </html>

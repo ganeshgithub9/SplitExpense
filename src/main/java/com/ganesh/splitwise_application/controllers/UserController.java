@@ -8,11 +8,13 @@ import com.ganesh.splitwise_application.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+
+@Controller
 @AllArgsConstructor
 //@RequestMapping("/user")
 public class UserController {
@@ -48,9 +50,10 @@ public class UserController {
     }
 
     //security trial
-    @GetMapping("/hello")
-    public boolean hello(){
-        return userService.hello();
+    @GetMapping("/registerUser")
+    public String registerUser(Model m){
+        m.addAttribute("user",new CreateUserDTO());
+        return "register_user";
     }
     /*public ModelAndView hello(){
         ModelAndView mv=new ModelAndView();
