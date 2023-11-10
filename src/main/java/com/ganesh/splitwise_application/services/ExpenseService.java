@@ -1,43 +1,18 @@
 package com.ganesh.splitwise_application.services;
 
 import com.ganesh.splitwise_application.DTO.CreateExpenseDto;
+import com.ganesh.splitwise_application.DTO.GetExpenseDto;
 import com.ganesh.splitwise_application.models.Expense;
-import com.ganesh.splitwise_application.models.Group;
 import com.ganesh.splitwise_application.models.User;
-import com.ganesh.splitwise_application.repositories.ExpenseRepository;
-import com.ganesh.splitwise_application.repositories.GroupRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class ExpenseService {
-    GroupService groupService;
-    UserService userService;
-     ExpenseRepository expenseRepository;
+import java.util.List;
 
-     @Autowired
-     ExpenseService(GroupService gs, UserService us, ExpenseRepository er){
-         groupService=gs;
-         userService=us;
-         expenseRepository=er;
-     }
+public interface ExpenseService {
+    public Expense createExpense(Long id, CreateExpenseDto d);
+    public Expense getExpense(Long expenseId) throws NullPointerException;
+    public double getAmount(Long id);
 
-    public Expense createExpense(long id,CreateExpenseDto d) {
-        Expense e=new Expense();
-        e.setName(d.getName());
-        e.setAmount(d.getAmount());
-        User u=userService.getUser(d.getUserId());
-        e.setCreatedBy(u);
-        Group g=groupService.getGroup(id);
-        e.setGroup(g);
-        return expenseRepository.save(e);
-    }
+    Expense deleteExpense(Long expenseId);
 
-    public Expense getExpense(long expenseId) {
-         return expenseRepository.findById(expenseId).orElse(null);
-    }
-
-    public double getAmount(long id) {
-         return expenseRepository.findAmountById(id);
-    }
+    List<User> getUsers(Long expenseId);
 }

@@ -7,17 +7,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@EqualsAndHashCode(callSuper = false)
 @Table(name="transactions")
 public class Transaction extends BaseModel{
 
     @ManyToOne
     @JoinColumn(name="user_id",referencedColumnName = "id")
-    private User payer;
+    private User user;
+
+    @ManyToOne
+    @JoinColumn
+    private User createdBy;
 
     private Double amount;
 
@@ -25,6 +27,7 @@ public class Transaction extends BaseModel{
     private TransactionType type;
 
     @ManyToOne
-    @JoinColumn(name="exp_id",referencedColumnName = "id")
+    @JoinColumn(name="expense_id",referencedColumnName = "id")
     private Expense expense;
+
 }

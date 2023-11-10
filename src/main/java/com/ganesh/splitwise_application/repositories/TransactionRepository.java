@@ -14,6 +14,9 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction,Long> {
 
     List<Transaction> findAllByExpenseIdAndType(long id, TransactionType t);
-    @Query("select sum(t.amount) from Transaction t where t.expense=:exp and t.type=:paid")
-    double findSumByExpIdAndType(@Param("exp") Expense exp, @Param("paid") TransactionType paid);
+//    @Query("select sum(t.amount) from Transaction t where t.expense=:exp and t.type=:paid")
+//    double findSumByExpIdAndType(@Param("exp") Expense exp, @Param("paid") TransactionType paid);
+    @Query("select sum(t.amount) from Transaction t where t.expense=:e and t.type=:type")
+    Double findSumByExpenseAndType(Expense e, TransactionType type);
+
 }

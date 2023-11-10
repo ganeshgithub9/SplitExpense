@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication()
-@ComponentScan(basePackages = {"com.ganesh.splitwise_application.services"})
-@ComponentScan(basePackages = {"com.ganesh.splitwise_application.repositories"})
-@ComponentScan(basePackages = {"com.ganesh.splitwise_application.controllers"})
+//@ComponentScan(basePackages = {"com.ganesh.splitwise_application.services"})
+//@ComponentScan(basePackages = {"com.ganesh.splitwise_application.repositories"})
+//@ComponentScan(basePackages = {"com.ganesh.splitwise_application.controllers"})
 @EnableJpaAuditing
 public class SplitwiseApplication {
 

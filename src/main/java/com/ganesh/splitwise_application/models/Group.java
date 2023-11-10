@@ -7,28 +7,34 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@NoArgsConstructor
+
 @Setter
 @Getter
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "groups")
 public class Group extends BaseModel{
     private String name,about;
 
     //@JsonManagedReference      //starting point of infinite recursion
-    @ManyToMany(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
-    @JoinTable(name="groups_users",joinColumns = {@JoinColumn(name="group_id",referencedColumnName ="id")},inverseJoinColumns = {@JoinColumn(name="user_id",referencedColumnName ="id")}) //hibernate creates the table automatically
+    @ManyToMany
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(name="groups_users",joinColumns = {@JoinColumn(name = "group_id")},inverseJoinColumns = {@JoinColumn(name = "user_id")}) //hibernate creates the table automatically
     private List<User> users=new ArrayList<>();
 
-//    @OneToMany(mappedBy = "group")
-//    private List<Expense> expenses=new ArrayList<>();  //no need of bidirectional as it is onetomany and child table
+    @ManyToOne()
+    @JoinColumn
+    private User createdBy;
+
+    @OneToMany(mappedBy = "group",cascade = {CascadeType.ALL})
+    private List<Expense> expenses=new ArrayList<>();  //no need of bidirectional as it is onetomany and child table
 
 //    public CreateGroupDto toDto() {
 //        CreateGroupDto d=new CreateGroupDto();

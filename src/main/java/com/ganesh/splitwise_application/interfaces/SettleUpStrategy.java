@@ -7,5 +7,5 @@ import com.ganesh.splitwise_application.models.User;
 import java.util.List;
 
 public interface SettleUpStrategy {
-    public List<SettleUpTransaction> settleUpTransactions(User captain, List<Transaction> l1, List<Transaction> l2);
+    public List<SettleUpTransaction> settleUpTransactions(User captain,List<User> users, List<Transaction> l1, List<Transaction> l2);
 }

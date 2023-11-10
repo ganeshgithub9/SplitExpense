@@ -10,6 +10,6 @@ import lombok.Setter;
 public class GetExpenseDto {
     String name;
     Double amount;
-    GetGroupDto getGroupDto;
-    GetUserDTO getUserDTO;
+    String group;
+    String createdBy;
 }

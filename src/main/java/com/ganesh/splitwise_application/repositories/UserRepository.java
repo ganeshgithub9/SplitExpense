@@ -19,5 +19,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
 //    List<Group> findGroupsById(long id);
 
 //    @Query("select g.users from Group g join fetch g.users")
-//    List<User> findAllById(List<Long> users);
+    List<User> findAllByIdIn(List<Long> users);
 }

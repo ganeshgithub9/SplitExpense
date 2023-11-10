@@ -1,10 +1,8 @@
 package com.ganesh.splitwise_application.controllers;
 
 import com.ganesh.splitwise_application.DTO.SettleUpTransaction;
-import com.ganesh.splitwise_application.models.Expense;
-import com.ganesh.splitwise_application.services.ExpenseService;
-import com.ganesh.splitwise_application.services.SettleUpService;
-import com.ganesh.splitwise_application.services.TransactionService;
+import com.ganesh.splitwise_application.exceptions.AmountExceededException;
+import com.ganesh.splitwise_application.services.*;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,12 +15,16 @@ public class SettleUpController {
     SettleUpService settleUpService;
     TransactionService transactionService;
     ExpenseService expenseService;
-    @GetMapping(value = "expense/{id}/settleup")
-    public List<SettleUpTransaction> generateSettleUpTransactions(@PathVariable long id){
-        double total = transactionService.amountFilledPerExpense(id);
-        double exp_amount=expenseService.getAmount(id);
-        if(total!=exp_amount)
-            throw new RuntimeException("You missed paying total amount"); //checking amount paid equal to expense amount
-        return settleUpService.settleUpTransactions(id);
+    @GetMapping(value = "expenses/{expenseId}/settleUp")
+    public List<SettleUpTransaction> generateSettleUpTransactions(@PathVariable Long expenseId) throws AmountExceededException{
+        System.out.println("settle up controller");
+        double expenseAmount= expenseService.getAmount(expenseId);
+        double paidTotal = transactionService.amountPaidPerExpense(expenseId);
+        double distributionTotal = transactionService.billDistributionPerExpense(expenseId);
+        if(paidTotal<expenseAmount)
+            throw new AmountExceededException("You have not paid total expense amount"); //checking amount paid equal to expense amount
+        if(distributionTotal<expenseAmount)
+            throw new AmountExceededException("You have not distributed total expense amount");
+        return settleUpService.settleUpTransactions(expenseId);
     }
 }

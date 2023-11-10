@@ -11,10 +11,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@NoArgsConstructor
+
 @Setter
 @Getter
-@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "expenses")
 //@Table to change the table name
@@ -23,16 +22,16 @@ public class Expense extends BaseModel {
     private String name;
     private Double amount;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name="group_id",referencedColumnName = "id")
     private Group group;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name="user_id",referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name="user_id")
     private User createdBy;
 
-    @OneToMany(mappedBy = "expense")
-    private List<Transaction> paidTransactions=new ArrayList<>();
-    @OneToMany(mappedBy = "expense")
-    private List<Transaction> billPerPerson=new ArrayList<>();
+    @OneToMany(mappedBy = "expense",cascade = {CascadeType.ALL})
+    private List<Transaction> transactions=new ArrayList<>();
+//    @OneToMany(mappedBy = "expense")
+//    private List<Transaction> billPerPerson=new ArrayList<>();
 }
